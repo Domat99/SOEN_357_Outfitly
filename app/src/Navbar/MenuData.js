@@ -7,7 +7,7 @@ export const MenuData = [
     },
     {
         title: "Closet",
-        url: "/closet",
+        url: "/Closet",
         cName: "navlinks",
         icon: "fa-solid fa-shirt",
     },
