@@ -5,11 +5,31 @@
     margin: 0;
     padding: 0;
 }
+.feature-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 14px;
+    color: #669bbc;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15);
+}
+
+.cta-buttons button {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cta-buttons button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(102, 155, 188, 0.25);
+}
 
 /***** HERO SECTION *****/
 .hero {
     background: linear-gradient(135deg, #e9f5ff, #fde2e2); /* gender-neutral gradient */
-    padding: 100px 40px;
+    padding: 100px 1px;
     position: relative;
     overflow: hidden;
 }
