@@ -1,0 +1,119 @@
+.NavbarItems {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #354f52;
+    padding: 0 40px;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+
+.logo {
+    height: 48px;
+    filter: brightness(1.05);
+}
+
+
+.menuIcones {
+    display: none;
+    font-size: 24px;
+    color: #f8f8f8;
+    cursor: pointer;
+}
+
+.navMenu {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+.navlinks {
+    color: #fdfdfd;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.25s ease-in-out;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.navlinks:hover {
+    background-color: #f8e8e8;
+    color: #2b2d42;
+}
+
+
+.navLogIn,
+.navLogOut {
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.navLogIn {
+    background-color: #84a98c;
+    color: #2b2d42;
+}
+
+.navLogIn:hover {
+    background-color: #6b8e7c;
+    color: #1a1a1a;
+}
+
+.navLogOut {
+    background-color: #b5838d;
+    color: #1a1a1a;
+}
+
+.navLogOut:hover {
+    background-color: #9e6c77;
+}
+
+
+@media screen and (max-width: 768px) {
+    .menuIcones {
+        display: block;
+    }
+
+    .navMenu {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background-color: #354f52;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+        display: none;
+    }
+
+    .navMenu.active {
+        display: flex;
+    }
+
+    .navlinks {
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    .navLogIn,
+    .navLogOut {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
