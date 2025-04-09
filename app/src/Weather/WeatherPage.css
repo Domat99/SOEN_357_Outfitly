@@ -1,6 +1,6 @@
 .weather-page {
     font-family: 'Outfit', sans-serif;
-    background-image: url('C:/SOEN357/repo/SOEN_357_Outfitly/app/public/weather-bg.jpg');
+    background-image: url('/');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
