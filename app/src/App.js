@@ -5,7 +5,6 @@ import Navbar from './Navbar/Navbar';
 import ProfilePage from './Profile/ProfilePage';
 import LoginPage from './Login/LoginPage';
 import OutfitPlanner from './Planner/OutfitPlanner';
-import ClosetPage from './Closet/ClosetPage';
 import WeatherPage from './Weather/WeatherPage';
 
 
@@ -19,7 +18,6 @@ function App() {
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/planner" element={<OutfitPlanner />} />
-                <Route path="/closet" element={<ClosetPage />} />
                 <Route path="/weather" element={<WeatherPage />} />
 
             </Routes>
