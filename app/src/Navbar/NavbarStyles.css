@@ -62,6 +62,8 @@
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     border: 1px solid transparent;
+    top: 2px;
+    position: relative;
 }
 
 .navLogIn {
@@ -76,7 +78,7 @@
 
 .navLogOut {
     background-color: #b5838d;
-    color: #1a1a1a;
+    color: #ffffff;
 }
 
 .navLogOut:hover {

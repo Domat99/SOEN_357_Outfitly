@@ -1,3 +1,4 @@
+/* Global Container */
 .planner-page {
     font-family: 'Outfit', sans-serif;
     padding: 80px 40px;
@@ -9,6 +10,7 @@
     align-items: center;
 }
 
+/* Header */
 .planner-header {
     max-width: 800px;
     text-align: center;
@@ -27,14 +29,31 @@
     line-height: 1.5;
 }
 
+/* Occasion Selector */
+.occasion-selector {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.occasion-selector select {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Outfit Card */
 .outfit-card {
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
     padding: 40px;
     width: 100%;
-    max-width: 600px;
-    text-align: left;
+    max-width: 650px;
+    text-align: center;
     transition: transform 0.3s ease;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -45,19 +64,137 @@
     color: #1a1a2e;
 }
 
-.outfit-card ul {
-    list-style: none;
-    padding: 0;
-    font-size: 1.05rem;
+/* Outfit Images */
+.outfit-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.outfit-images img {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.outfit-images p {
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 500;
     color: #333;
 }
 
-.outfit-card li {
-    margin-bottom: 12px;
+/* Outfit Actions */
+.outfit-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* Saved Outfits */
+.saved-outfits {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.saved-outfits h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1a1a2e;
+}
+
+.saved-outfit {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.saved-outfit .outfit-images {
+    justify-content: start;
+}
+
+.saved-outfit button {
+    margin-top: 14px;
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.saved-outfit button:hover {
+    background-color: #c0392b;
+}
+
+/* Buttons */
+
+/* Primary: Generate Outfit */
+.btn-generate {
+    background-color: #3f7cac;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-generate:hover {
+    background-color: #356c8b;
+}
+
+/* Secondary: Try Again */
+.btn-try {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 18px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-try:hover {
+    background-color: #e0e0e0;
+}
+
+/* Success: Save Outfit */
+.btn-save {
+    background-color: #84a98c;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #354f52;
+
 }
 
 /* Animation */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
