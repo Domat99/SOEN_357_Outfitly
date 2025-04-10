@@ -171,7 +171,7 @@ export const initialClosetItems = {
             name: 'Sport Trainers',
             image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS778o6xGaDwCnJUTZxKEjGTyr1ggy5v1jc3y6M1XWQuO-jHX8LiKNjSWIkihmkR9G8UV204e1wRS3sQNpWf3b2s3CAv63DKEUs-TdmbfdidNjfw4kKvVLF&usqp=CAc',
             status: 'Worn Recently',
-            tags: ['Sport']
+            tags: ['Sport','Travel']
         },
         {
             name: 'Black Heels',
