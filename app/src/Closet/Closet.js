@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Closet.css';
+import { uploadToCloudinary } from './uploadToCloudinary';
+
 
 
 export default function Closet({ closetItems, setClosetItems }) {
@@ -110,15 +112,16 @@ export default function Closet({ closetItems, setClosetItems }) {
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={async (e) => {
                                 const file = e.target.files[0];
                                 if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                        setNewItem({ ...newItem, image: reader.result });
+                                    const imageUrl = await uploadToCloudinary(file);
+                                    if (imageUrl) {
+                                        setNewItem({ ...newItem, image: imageUrl });
                                         setErrorMsg('');
-                                    };
-                                    reader.readAsDataURL(file);
+                                    } else {
+                                        setErrorMsg('Failed to upload image.');
+                                    }
                                 }
                             }}
                         />

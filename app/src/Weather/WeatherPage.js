@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './WeatherPage.css';
-
-const mockWeather = {
-    temperature: 18,
-    condition: 'Partly Cloudy',
-    humidity: 60,
-    wind: '15 km/h',
-};
-
-const tips = {
-    'Sunny': "Wear light fabrics and sunglasses!",
-    'Partly Cloudy': "Layer up — it might cool down later.",
-    'Rainy': "Don’t forget a waterproof jacket and boots.",
-    'Snowy': "Bundle up with warm layers and gloves.",
-    'Windy': "Opt for a windbreaker and avoid flowy outfits.",
-};
+import { fetchWeather, tips } from './weatherAPI';
 
 const WeatherPage = () => {
-    const [weather, setWeather] = useState(mockWeather);
+    const [weather, setWeather] = useState(null);
+
+    useEffect(() => {
+        const getWeather = async () => {
+            const latitude = 45.5017;
+            const longitude = -73.5673;
+            const fetchedWeather = await fetchWeather(latitude, longitude);
+            if (fetchedWeather) setWeather(fetchedWeather);
+        };
+
+        getWeather();
+    }, []);
+
+    if (!weather) {
+        return <div className="weather-page">Loading weather data...</div>;
+    }
 
     return (
         <div className="weather-page">
