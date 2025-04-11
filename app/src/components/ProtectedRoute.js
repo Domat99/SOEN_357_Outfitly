@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
             <img src={loginImage} alt="Please log in" className="login-prompt-image" />
             <h2>Please log in to access this feature</h2>
             <p>You need to be signed in to use this part of the app.</p>
-            <button className="login-button" onClick={() => navigate('/login')}>
+            <button className="login-button_planner" onClick={() => navigate('/login')}>
                 Go to Login
             </button>
         </div>
