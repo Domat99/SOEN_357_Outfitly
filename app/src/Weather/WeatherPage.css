@@ -1,83 +1,127 @@
 .weather-page {
     font-family: 'Outfit', sans-serif;
-    background-image: url('../assets/images/WeatherBackground.png');
+    background-image: url('../assets/images/WeatherBackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 85vh; /* smaller height */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 40px 20px;
 }
 
+/* Glass-like panel */
 .weather-overlay {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px 32px;
     border-radius: 20px;
     width: 100%;
     max-width: 700px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Header section */
 .weather-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .weather-title {
-    font-size: 2.6rem;
-    margin-bottom: 14px;
-    color: #1a1a2e;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #102542;
+    margin-bottom: 12px;
 }
 
 .weather-subtitle {
     font-size: 1.1rem;
-    color: #555;
+    color: #444;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
+/* Main card */
 .weather-card {
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    padding: 30px;
+    padding: 28px 24px;
     text-align: center;
     transition: transform 0.3s ease;
 }
 
 .weather-card h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.9rem;
+    margin-bottom: 8px;
     color: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
+/* Temperature style + slight animation */
 .weather-card .temp {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    color: #102542;
+    animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .weather-card p {
     font-size: 1.05rem;
-    margin: 8px 0;
+    margin: 6px 0;
     color: #333;
 }
 
+/* What to wear suggestion */
 .weather-tip {
-    margin-top: 30px;
+    margin-top: 24px;
     background-color: #f2f8ff;
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
 }
 
 .weather-tip h3 {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    font-weight: 600;
     color: #1a1a2e;
+    font-size: 1.1rem;
 }
 
 /* Fade-in animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive padding fix */
+@media screen and (max-width: 600px) {
+    .weather-overlay {
+        padding: 32px 20px;
+    }
+
+    .weather-title {
+        font-size: 2rem;
+    }
+
+    .weather-subtitle {
+        font-size: 1rem;
+    }
+
+    .weather-card .temp {
+        font-size: 2.4rem;
+    }
 }

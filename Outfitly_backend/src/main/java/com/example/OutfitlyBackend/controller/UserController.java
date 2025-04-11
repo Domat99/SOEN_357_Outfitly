@@ -43,4 +43,9 @@ public class UserController {
     public ClosetItem addClosetItemToUser(@PathVariable String userId, @RequestBody ClosetItem item) {
         return userService.addItemToUserCloset(userId, item);
     }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable String id, @RequestBody User updatedUser) {
+        return userService.updateUser(id, updatedUser);
+    }
 }

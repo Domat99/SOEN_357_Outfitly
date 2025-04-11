@@ -57,7 +57,7 @@ function App() {
                     path="/planner"
                     element={
                         <ProtectedRoute>
-                            <OutfitPlanner closetItems={closetItems} />
+                            <OutfitPlanner/>
                         </ProtectedRoute>
                     }
                 />
