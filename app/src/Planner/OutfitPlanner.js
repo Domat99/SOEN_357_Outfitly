@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
+import { FiTrash2 } from 'react-icons/fi';
 
 const OutfitPlanner = ({}) => {
     const [outfit, setOutfit] = useState(null);
@@ -141,7 +142,9 @@ const OutfitPlanner = ({}) => {
                                     <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
                                     </div>}
                             </div>
-                            <button onClick={() => handleDeleteOutfit(index)}>Delete</button>
+                            <div className="trash-icon" onClick={() => handleDeleteOutfit(index)}>
+                                <FiTrash2 size={20}/>
+                            </div>
                         </div>
                     ))}
                 </div>

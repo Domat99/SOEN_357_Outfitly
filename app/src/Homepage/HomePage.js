@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import Footer from "../Footer/Footer";
 import mainHomePagePic from "../assets/images/Main_Page_Picture.png";
-
-
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const user = localStorage.getItem('loggedInUser');
+        if (user) setIsLoggedIn(true);
+    }, []);
+
     return (
         <div className="homepage">
             <section className="hero">
@@ -16,8 +23,15 @@ const HomePage = () => {
                             Outfitly is your AI-powered personal stylist that curates outfits based on your wardrobe, weather, and preferences — so you never stress over what to wear again.
                         </p>
                         <div className="cta-buttons">
-                            <button className="btn-primary-home">Get Started</button>
-                            <button className="btn-outline">Log In</button>
+                            <button className="btn-primary-home" onClick={() => navigate('/planner')}>
+                                Get Started
+                            </button>
+
+                            {!isLoggedIn && (
+                                <button className="btn-outline" onClick={() => navigate('/login')}>
+                                    Log In
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="hero-image">
@@ -50,6 +64,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
             <section className="how-it-works">
                 <h2>How It Works</h2>
                 <div className="steps">
@@ -70,6 +85,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
             <Footer />
         </div>
     );
