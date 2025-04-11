@@ -5,23 +5,41 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = ({ setLoggedInUser }) => {
     const navigate = useNavigate();
-    const handleLogin = (e) => {
+
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const emailInput = e.target[0].value;
-        const passwordInput = e.target[1].value;
+        const email = e.target[0].value;
+        const password = e.target[1].value;
 
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const user = users.find(u => u.email === emailInput && u.password === passwordInput);
+        try {
+            const response = await fetch('http://localhost:8080/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
-        if (user) {
-            console.log('Login successful');
-            localStorage.setItem('loggedInUser', JSON.stringify(user));
-            setLoggedInUser(user);
-            navigate('/');
-        } else {
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+
+            const user = await response.json();
+
+            if (user) {
+                console.log('Login successful');
+                localStorage.setItem('loggedInUser', JSON.stringify(user));
+                setLoggedInUser(user);
+                navigate('/');
+            } else {
+                alert('Invalid email or password');
+            }
+        } catch (err) {
+            console.error(err);
             alert('Invalid email or password');
         }
     };
+
 
     return (
         <div className="login-page">

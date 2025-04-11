@@ -9,6 +9,7 @@ import SignUp from './Login/SignUp';
 import OutfitPlanner from './Planner/OutfitPlanner';
 import WeatherPage from './Weather/WeatherPage';
 import {initialClosetItems} from "./Closet/initialClosetItems";
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 
@@ -33,13 +34,35 @@ function App() {
             <Navbar loggedInUser={loggedInUser} handleLogout={handleLogout} />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/closet" element={<Closet closetItems={closetItems} setClosetItems={setClosetItems} />} />
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route
+                    path="/closet"
+                    element={
+                        <ProtectedRoute>
+                            <Closet closetItems={closetItems} setClosetItems={setClosetItems} />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/planner"
+                    element={
+                        <ProtectedRoute>
+                            <OutfitPlanner closetItems={closetItems} />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/login" element={<LoginPage setLoggedInUser={setLoggedInUser} />} />
-                <Route path="/Signup" element={<SignUp />} />
-                <Route path="/planner" element={<OutfitPlanner closetItems={closetItems} />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/weather" element={<WeatherPage />} />
             </Routes>
+
         </Router>
     );
 }
