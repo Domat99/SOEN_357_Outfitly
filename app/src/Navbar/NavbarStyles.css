@@ -85,7 +85,22 @@
 .navLogOut:hover {
     background-color: #9e6c77;
 }
+.active-link {
+    background-color: #cad2c5;
+    color: #1a1a1a;
+}
 
+.navlinks.active {
+    background-color: #f8e8e8;
+    color: #2b2d42;
+    /*border-radius: 6px;*/
+}
+
+.navlinks.active:hover {
+    background-color: #f5cbcb;
+    color: #2b2d42;
+
+}
 
 @media screen and (max-width: 768px) {
     .menuIcones {
