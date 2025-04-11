@@ -38,7 +38,7 @@
 .navlinks {
     color: #fdfdfd;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -58,8 +58,8 @@
 .navLogOut {
     padding: 7px 16px;
     border-radius: 6px;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 18px;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     border: 1px solid transparent;
@@ -69,7 +69,7 @@
 
 .navLogIn {
     background-color: #84a98c;
-    color: #2b2d42;
+    color: #354e52;
 }
 
 .navLogIn:hover {

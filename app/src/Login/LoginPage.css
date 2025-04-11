@@ -1,11 +1,10 @@
 .login-page {
     font-family: 'Outfit', sans-serif;
     background-color: #fffdfc;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 30px;
 }
 
 .login-card {
@@ -54,7 +53,7 @@
     border-color: #669bbc;
 }
 
-.login-button {
+.login-button-page {
     padding: 16px;
     font-size: 1.1rem;
     width: 100%;
