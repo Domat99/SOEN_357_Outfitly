@@ -1,8 +1,36 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
+import {FiTrash2} from 'react-icons/fi';
 import Footer from "../Footer/Footer";
 
 const OutfitPlanner = ({}) => {
+    const storeSuggestions = {
+        Casual: [
+            { name: 'H&M', url: 'https://www2.hm.com/en_us/ladies.html' },
+            { name: 'Uniqlo', url: 'https://www.uniqlo.com/us/en/women' },
+        ],
+        Work: [
+            { name: 'Banana Republic', url: 'https://bananarepublic.gap.com/browse/category.do?cid=1017332' },
+            { name: 'Zara', url: 'https://www.zara.com/ca/en/woman-new-in-l1180.html' },
+        ],
+        Formal: [
+            { name: 'Reformation', url: 'https://www.thereformation.com/categories/dresses' },
+            { name: 'Nordstrom', url: 'https://www.nordstrom.ca/browse/women' },
+        ],
+        Party: [
+            { name: 'PrettyLittleThing', url: 'https://www.prettylittlething.ca/clothing.html' },
+            { name: 'Fashion Nova', url: 'https://www.fashionnova.com/collections/party' },
+        ],
+        Travel: [
+            { name: 'Aritzia', url: 'https://www.aritzia.com/en/clothing' },
+            { name: 'Old Navy', url: 'https://oldnavy.gap.com/browse/category.do?cid=1057888' },
+        ],
+        Sport: [
+            { name: 'Nike', url: 'https://www.nike.com/w/womens-clothing-5e1x6z6ymx6' },
+            { name: 'Lululemon', url: 'https://shop.lululemon.com/c/women/_/N-8t7' },
+        ]
+    };
+
     const [outfit, setOutfit] = useState(null);
     const [occasion, setOccasion] = useState('Casual');
     const [savedOutfits, setSavedOutfits] = useState([]);
@@ -17,7 +45,7 @@ const OutfitPlanner = ({}) => {
         try {
             const response = await fetch('http://localhost:8080/api/outfit/generate', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     userId: user.id,
                     styleType: occasion,
@@ -27,11 +55,17 @@ const OutfitPlanner = ({}) => {
                 }),
             });
 
-            if (!response.ok) throw new Error('Failed to generate outfit');
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Backend error:', errorText);
+                alert('Error generating outfit');
+                return;
+            }
 
             const data = await response.json();
 
-            const formattedOutfit = { occasion };
+            const formattedOutfit = {occasion};
+
             data.forEach(item => {
                 const type = item.type.toLowerCase();
 
@@ -99,58 +133,84 @@ const OutfitPlanner = ({}) => {
                     </button>
                 </div>
 
-                {outfit && (
-                    <div className="outfit-card">
-                        <h2>Today's Look <span style={{fontWeight: 400, fontSize: '1rem'}}>({outfit.occasion})</span></h2>
-                        <div className="outfit-images">
-                            {outfit.layerImage && (
-                                <div><img src={outfit.layerImage} alt="Layer"/><p>{outfit.layer}</p></div>
-                            )}
-                            {outfit.topImage && (
-                                <div><img src={outfit.topImage} alt="Top"/><p>{outfit.top}</p></div>
-                            )}
-                            {outfit.bottomImage && (
-                                <div><img src={outfit.bottomImage} alt="Bottom"/><p>{outfit.bottom}</p></div>
-                            )}
-                            {outfit.shoesImage && (
-                                <div><img src={outfit.shoesImage} alt="Shoes"/><p>{outfit.shoes}</p></div>
-                            )}
-                            {outfit.accessoryImage && (
-                                <div><img src={outfit.accessoryImage} alt="Accessory"/><p>{outfit.accessory}</p></div>
-                            )}
-                        </div>
-                        <div className="outfit-actions">
-                            <button className="btn-try" onClick={handleGenerateOutfit}>Try Again</button>
-                            <button className="btn-save" onClick={handleSaveOutfit}>Save Outfit</button>
-                        </div>
+            {outfit && (
+                <div className="outfit-card">
+                    <h2>Today's Look <span style={{fontWeight: 400, fontSize: '1rem'}}>({outfit.occasion})</span></h2>
+                    <div className="outfit-images">
+                        {outfit.layerImage && (
+                            <div><img src={outfit.layerImage} alt="Layer"/><p>{outfit.layer}</p></div>
+                        )}
+                        {outfit.topImage && (
+                            <div><img src={outfit.topImage} alt="Top"/><p>{outfit.top}</p></div>
+                        )}
+                        {outfit.bottomImage && (
+                            <div><img src={outfit.bottomImage} alt="Bottom"/><p>{outfit.bottom}</p></div>
+                        )}
+                        {outfit.shoesImage && (
+                            <div><img src={outfit.shoesImage} alt="Shoes"/><p>{outfit.shoes}</p></div>
+                        )}
+                        {outfit.accessoryImage && (
+                            <div><img src={outfit.accessoryImage} alt="Accessory"/><p>{outfit.accessory}</p></div>
+                        )}
                     </div>
-                )}
-
-                {savedOutfits.length > 0 && (
-                    <div className="saved-outfits">
-                        <h3>Saved Outfits</h3>
-                        {savedOutfits.map((saved, index) => (
-                            <div key={index} className="saved-outfit">
-                                <div className="outfit-images">
-                                    {saved.layerImage &&
-                                        <div><img src={saved.layerImage} alt="Layer"/><p>{saved.layer}</p></div>}
-                                    {saved.topImage && <div><img src={saved.topImage} alt="Top"/><p>{saved.top}</p></div>}
-                                    {saved.bottomImage &&
-                                        <div><img src={saved.bottomImage} alt="Bottom"/><p>{saved.bottom}</p></div>}
-                                    {saved.shoesImage &&
-                                        <div><img src={saved.shoesImage} alt="Shoes"/><p>{saved.shoes}</p></div>}
-                                    {saved.accessoryImage &&
-                                        <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
-                                        </div>}
-                                </div>
-                                <button onClick={() => handleDeleteOutfit(index)}>Delete</button>
+                    <div className="outfit-actions">
+                        <button className="btn-try" onClick={handleGenerateOutfit}>Try Again</button>
+                        <button className="btn-save" onClick={handleSaveOutfit}>Save Outfit</button>
+                    </div>
+                    {storeSuggestions[outfit.occasion] && (
+                        <div className="store-suggestions">
+                            <h3>Shop Similar Styles:</h3>
+                            <div className="store-card-container">
+                                {storeSuggestions[outfit.occasion].map((store, idx) => (
+                                    <a
+                                        key={idx}
+                                        href={store.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="store-card"
+                                    >
+                                        <div className="store-card-content">
+                                            <p className="store-name">{store.name}</p>
+                                            <p className="store-link">Visit Store →</p>
+                                        </div>
+                                    </a>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+                        </div>
+                    )}
+
+
+                </div>
+            )}
+
+            {savedOutfits.length > 0 && (
+                <div className="saved-outfits">
+                    <h3>Saved Outfits</h3>
+                    {savedOutfits.map((saved, index) => (
+                        <div key={index} className="saved-outfit">
+                            <div className="outfit-images">
+                                {saved.layerImage &&
+                                    <div><img src={saved.layerImage} alt="Layer"/><p>{saved.layer}</p></div>}
+                                {saved.topImage && <div><img src={saved.topImage} alt="Top"/><p>{saved.top}</p></div>}
+                                {saved.bottomImage &&
+                                    <div><img src={saved.bottomImage} alt="Bottom"/><p>{saved.bottom}</p></div>}
+                                {saved.shoesImage &&
+                                    <div><img src={saved.shoesImage} alt="Shoes"/><p>{saved.shoes}</p></div>}
+                                {saved.accessoryImage &&
+                                    <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
+                                    </div>}
+                            </div>
+                            <div className="trash-icon" onClick={() => handleDeleteOutfit(index)}>
+                                <FiTrash2 size={20}/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
             <Footer />
         </div>
+
     );
 };
 
