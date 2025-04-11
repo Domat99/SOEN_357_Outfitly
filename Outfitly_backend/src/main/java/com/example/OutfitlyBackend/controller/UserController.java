@@ -38,4 +38,9 @@ public class UserController {
     public List<ClosetItem> getClosetByEmail(@RequestParam String email) {
         return userService.getClosetByEmail(email);
     }
+
+    @PostMapping("/{userId}/closet")
+    public ClosetItem addClosetItemToUser(@PathVariable String userId, @RequestBody ClosetItem item) {
+        return userService.addItemToUserCloset(userId, item);
+    }
 }
