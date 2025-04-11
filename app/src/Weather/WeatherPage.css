@@ -1,6 +1,6 @@
 .weather-page {
     font-family: 'Outfit', sans-serif;
-    /*background-image: url('');*/
+    background-image: url('../assets/images/WeatherBackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

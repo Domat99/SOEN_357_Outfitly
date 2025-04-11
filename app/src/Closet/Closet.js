@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Closet.css';
-import { uploadToCloudinary } from './uploadToCloudinary';
+import {uploadToCloudinary} from './uploadToCloudinary';
 
 
-
-export default function Closet({ closetItems, setClosetItems }) {
+export default function Closet({closetItems, setClosetItems}) {
     const [showModal, setShowModal] = useState(false);
-    const [newItem, setNewItem] = useState({ name: '', image: '', status: '', tags: [] });
+    const [newItem, setNewItem] = useState({name: '', image: '', status: '', tags: []});
     const [activeCategory, setActiveCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -14,22 +13,67 @@ export default function Closet({ closetItems, setClosetItems }) {
 
     const openModal = (category) => {
         setActiveCategory(category);
-        setNewItem({ name: '', image: '', status: '', tags: [] });
+        setNewItem({name: '', image: '', status: '', tags: []});
         setShowModal(true);
         setErrorMsg('');
     };
 
-    const addItem = () => {
+    const addItem = async () => {
         if (!newItem.name || !newItem.image) {
             setErrorMsg('Item name and image are required.');
             return;
         }
-        setClosetItems((prev) => ({
-            ...prev,
-            [activeCategory]: [...prev[activeCategory], newItem],
-        }));
-        setShowModal(false);
+
+        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (!user || !user.id) {
+            setErrorMsg("User not found");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/users/${user.id}/closet`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({...newItem, type: activeCategory}) // send type to categorize
+            });
+
+            if (!response.ok) throw new Error("Failed to save item");
+
+            const savedItem = await response.json();
+
+            setClosetItems((prev) => ({
+                ...prev,
+                [activeCategory]: [...prev[activeCategory], savedItem],
+            }));
+            setShowModal(false);
+        } catch (error) {
+            console.error(error);
+            setErrorMsg('Error saving item.');
+        }
     };
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (user) {
+            fetch(`http://localhost:8080/api/closet/closet/${user.id}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("Fetched Closet Items:", data); // ⬅️ Add this line
+
+                    const grouped = {};
+                    for (const item of data) {
+                        if (!grouped[item.type]) grouped[item.type] = [];
+                        grouped[item.type].push(item);
+                    }
+                    setClosetItems(grouped);
+                });
+        }
+    }, [setClosetItems]);
+
+
+    if (!closetItems || Object.keys(closetItems).length === 0) {
+        return <div className="closet-page"><p>Loading closet...</p></div>;
+    }
+
 
     return (
         <div className="closet-page">
@@ -68,20 +112,25 @@ export default function Closet({ closetItems, setClosetItems }) {
                     <div key={category} className="category-section">
                         <h3>{category.toUpperCase()} ({filteredItems.length})</h3>
                         <div className="card-grid">
-                            {filteredItems.map((item, index) => (
-                                <div key={index} className="card">
-                                    <img src={item.image} alt={item.name} />
-                                    <div className="card-text">
-                                        <strong>{item.name}</strong>
-                                        <p>{item.status}</p>
-                                        <div className="tag-badges">
-                                            {item.tags?.map((tag, i) => (
-                                                <span key={i} className="tag-badge">{tag}</span>
-                                            ))}
+                            {filteredItems.map((item, index) => {
+                                console.log(item.image);
+
+                                return (
+                                    <div key={index} className="card">
+                                        <img src={item.link} alt={item.name}/>
+                                        <div className="card-text">
+                                            <strong>{item.name}</strong>
+                                            <p>{item.status}</p>
+                                            <div className="tag-badges">
+                                                {item.tags?.map((tag, i) => (
+                                                    <span key={i} className="tag-badge">{tag}</span>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
+
 
                             <div className="card add-card" onClick={() => openModal(category)}>
                                 <div className="plus">+</div>
@@ -103,7 +152,7 @@ export default function Closet({ closetItems, setClosetItems }) {
                             placeholder="Item Name"
                             value={newItem.name}
                             onChange={(e) => {
-                                setNewItem({ ...newItem, name: e.target.value });
+                                setNewItem({...newItem, name: e.target.value});
                                 setErrorMsg('');
                             }}
                         />
@@ -117,7 +166,7 @@ export default function Closet({ closetItems, setClosetItems }) {
                                 if (file) {
                                     const imageUrl = await uploadToCloudinary(file);
                                     if (imageUrl) {
-                                        setNewItem({ ...newItem, image: imageUrl });
+                                        setNewItem({...newItem, image: imageUrl});
                                         setErrorMsg('');
                                     } else {
                                         setErrorMsg('Failed to upload image.');
@@ -145,7 +194,7 @@ export default function Closet({ closetItems, setClosetItems }) {
                             placeholder="Status (e.g., Worn Recently)"
                             value={newItem.status}
                             onChange={(e) =>
-                                setNewItem({ ...newItem, status: e.target.value })
+                                setNewItem({...newItem, status: e.target.value})
                             }
                         />
 
