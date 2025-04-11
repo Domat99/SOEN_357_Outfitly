@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomePage.css';
+import Footer from "../Footer/Footer";
 import mainHomePagePic from "../assets/images/Main_Page_Picture.png";
 
 
@@ -69,6 +70,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 };
