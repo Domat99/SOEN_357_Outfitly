@@ -49,7 +49,7 @@ const LoginPage = ({ setLoggedInUser }) => {
                 <form className="login-form" onSubmit={handleLogin}>
                     <input type="text" placeholder="Email" className="login-input" required />
                     <input type="password" placeholder="Password" className="login-input" required />
-                    <button type="submit" className="btn-primary login-button">Log In</button>
+                    <button type="submit" className="btn-primary login-button-page">Log In</button>
                     <p className="signup-subtitle">
                         Don't have an account? <Link to="/signup">Sign up here</Link>
                     </p>
