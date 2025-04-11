@@ -232,3 +232,60 @@
 .trash-icon:hover {
     transform: scale(1.2);
 }
+.store-suggestions {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.store-suggestions h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #0d1b2a;
+}
+
+.store-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.store-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    text-align: center;
+    text-decoration: none;
+    width: 240px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.store-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.store-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.store-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.store-link {
+    font-size: 0.95rem;
+    color: #3a86ff;
+    font-weight: 500;
+}

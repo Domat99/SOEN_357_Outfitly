@@ -3,6 +3,33 @@ import './OutfitPlanner.css';
 import {FiTrash2} from 'react-icons/fi';
 
 const OutfitPlanner = ({}) => {
+    const storeSuggestions = {
+        Casual: [
+            { name: 'H&M', url: 'https://www2.hm.com/en_us/ladies.html' },
+            { name: 'Uniqlo', url: 'https://www.uniqlo.com/us/en/women' },
+        ],
+        Work: [
+            { name: 'Banana Republic', url: 'https://bananarepublic.gap.com/browse/category.do?cid=1017332' },
+            { name: 'Zara', url: 'https://www.zara.com/ca/en/woman-new-in-l1180.html' },
+        ],
+        Formal: [
+            { name: 'Reformation', url: 'https://www.thereformation.com/categories/dresses' },
+            { name: 'Nordstrom', url: 'https://www.nordstrom.ca/browse/women' },
+        ],
+        Party: [
+            { name: 'PrettyLittleThing', url: 'https://www.prettylittlething.ca/clothing.html' },
+            { name: 'Fashion Nova', url: 'https://www.fashionnova.com/collections/party' },
+        ],
+        Travel: [
+            { name: 'Aritzia', url: 'https://www.aritzia.com/en/clothing' },
+            { name: 'Old Navy', url: 'https://oldnavy.gap.com/browse/category.do?cid=1057888' },
+        ],
+        Sport: [
+            { name: 'Nike', url: 'https://www.nike.com/w/womens-clothing-5e1x6z6ymx6' },
+            { name: 'Lululemon', url: 'https://shop.lululemon.com/c/women/_/N-8t7' },
+        ]
+    };
+
     const [outfit, setOutfit] = useState(null);
     const [occasion, setOccasion] = useState('Casual');
     const [savedOutfits, setSavedOutfits] = useState([]);
@@ -128,6 +155,29 @@ const OutfitPlanner = ({}) => {
                         <button className="btn-try" onClick={handleGenerateOutfit}>Try Again</button>
                         <button className="btn-save" onClick={handleSaveOutfit}>Save Outfit</button>
                     </div>
+                    {storeSuggestions[outfit.occasion] && (
+                        <div className="store-suggestions">
+                            <h3>Shop Similar Styles:</h3>
+                            <div className="store-card-container">
+                                {storeSuggestions[outfit.occasion].map((store, idx) => (
+                                    <a
+                                        key={idx}
+                                        href={store.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="store-card"
+                                    >
+                                        <div className="store-card-content">
+                                            <p className="store-name">{store.name}</p>
+                                            <p className="store-link">Visit Store →</p>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+
                 </div>
             )}
 
