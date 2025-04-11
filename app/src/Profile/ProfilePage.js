@@ -94,24 +94,27 @@ function ProfilePage() {
 
       <div className="profile-content">
         {/* Personal Info */}
-        <div className="profile-card">
+        <div className="profile-card-user-info">
           <h2>Personal Info</h2>
           {isEditingInfo ? (
-            <>
-              <p>
-                <strong>Name:</strong><br />
-                <input name="name" value={formData.name} onChange={handleChange} />
-              </p>
-              <p>
-                <strong>Email:</strong><br />
-                <input name="email" value={formData.email} onChange={handleChange} />
-              </p>
-              <button className="btn-primary" onClick={saveInfo}>Save</button>
-            </>
+              <div className={"user-info-open"}>
+                <p className={"user-info-input-section"}>
+                  <strong>Name:</strong><br/>
+                  <input name="name" value={formData.name} onChange={handleChange}/>
+                </p>
+                <p className={"user-info-input-section"}>
+                  <strong>Email:</strong><br/>
+                  <input name="email" value={formData.email} onChange={handleChange}/>
+                </p>
+                <div className={"profile-button-container"}>
+                  <button className="btn-primary" onClick={saveInfo}>Save</button>
+                  <button className="btn-secondary" onClick={() => setIsEditingInfo(false)}>Cancel</button>
+                </div>
+                </div>
           ) : (
-            <>
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Email:</strong> {user.email}</p>
+              <>
+                <p><strong>Name:</strong> {user.name}</p>
+                <p><strong>Email:</strong> {user.email}</p>
               <button className="btn-primary" onClick={() => setIsEditingInfo(true)}>Edit</button>
             </>
           )}
@@ -146,7 +149,9 @@ function ProfilePage() {
           <h2>Wardrobe Summary</h2>
           <p><strong>Items:</strong> {(34 + user.closetImages?.length) || 34}</p>
           <p><strong>Favorite Brands:</strong> Zara, Uniqlo</p>
-          <button className="btn-primary" onClick={() => navigate('/closet')}>View Closet</button>
+          <div className={"profile-button-container"}>
+            <button className="btn-primary view-closet-button" onClick={() => navigate('/closet')}>View Closet</button>
+          </div>
         </div>
       </div>
     </div>
