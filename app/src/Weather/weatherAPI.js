@@ -1,44 +1,13 @@
 export const fetchWeather = async (latitude, longitude) => {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+    const url = `http://localhost:8080/api/weather?lat=${latitude}&lon=${longitude}`;
 
     try {
         const response = await fetch(url);
-        const data = await response.json();
-
-        const current = data.current_weather;
-
-        return {
-            temperature: current.temperature,
-            condition: mapCondition(current.weathercode),
-            humidity: 60,
-            wind: `${current.windspeed} km/h`,
-        };
+        return await response.json();
     } catch (error) {
-        console.error("Failed to fetch weather:", error);
+        console.error("Failed to fetch weather from backend:", error);
         return null;
     }
-};
-
-export const mapCondition = (code) => {
-    if ([0].includes(code)) return 'Clear';
-    if ([1, 2].includes(code)) return 'Partly Cloudy';
-    if ([3].includes(code)) return 'Cloudy';
-    if ([45, 48].includes(code)) return 'Fog';
-    if ([51, 53, 55].includes(code)) return 'Light Drizzle';
-    if ([56, 57].includes(code)) return 'Freezing Drizzle';
-    if ([61].includes(code)) return 'Slight Rain';
-    if ([63].includes(code)) return 'Moderate Rain';
-    if ([65].includes(code)) return 'Heavy Rain';
-    if ([66, 67].includes(code)) return 'Freezing Rain';
-    if ([71].includes(code)) return 'Slight Snowfall';
-    if ([73].includes(code)) return 'Moderate Snowfall';
-    if ([75].includes(code)) return 'Heavy Snowfall';
-    if ([80, 81, 82].includes(code)) return 'Rain Showers';
-    if ([85, 86].includes(code)) return 'Snow Showers';
-    if ([95].includes(code)) return 'Thunderstorm';
-    if ([96, 99].includes(code)) return 'Thunderstorm with Hail';
-
-    return 'Unknown';
 };
 
 export const tips = {
