@@ -1,20 +1,20 @@
 .NavbarItems {
-    width: 95%;
+    /*width: 95%;*/
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #354f52;
     padding: 0 40px;
-    height: 72px;
+    height: 80px;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
+    /*border-radius: 12px;*/
 }
 
 .logo {
-    height: 48px;
+    height: 60px;
     filter: brightness(1.05);
 }
 
@@ -32,12 +32,13 @@
     gap: 28px;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .navlinks {
     color: #fdfdfd;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 18px;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -57,18 +58,18 @@
 .navLogOut {
     padding: 7px 16px;
     border-radius: 6px;
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 18px;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     border: 1px solid transparent;
-    top: 2px;
+    top: 1px;
     position: relative;
 }
 
 .navLogIn {
     background-color: #84a98c;
-    color: #2b2d42;
+    color: #354e52;
 }
 
 .navLogIn:hover {
@@ -110,6 +111,7 @@
     .navlinks {
         justify-content: center;
         padding: 12px 0;
+
     }
 
     .navLogIn,
