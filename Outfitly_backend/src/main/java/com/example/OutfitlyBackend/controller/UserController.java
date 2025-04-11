@@ -29,7 +29,6 @@ public class UserController {
         return userService.login(loginRequest.getEmail(), loginRequest.getPassword());
     }
 
-    // Get user info: GET /api/users/{id}
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable String id) {
         return userService.getUserById(id);
