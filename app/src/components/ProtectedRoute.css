@@ -15,7 +15,7 @@
     margin-bottom: 1.5rem;
 }
 
-.login-button {
+.login-button_planner {
     background-color: #52796f;
     color: white;
     padding: 12px 24px;
@@ -28,6 +28,6 @@
     transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.login-button_planner:hover {
     background-color: #354f52;
 }
