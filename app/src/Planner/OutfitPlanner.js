@@ -6,27 +6,27 @@ const OutfitPlanner = ({}) => {
     const storeSuggestions = {
         Casual: [
             { name: 'H&M', url: 'https://www2.hm.com/en_us/ladies.html' },
-            { name: 'Uniqlo', url: 'https://www.uniqlo.com/us/en/women' },
+            { name: 'Uniqlo', url: 'https://www.uniqlo.com/us/en/' },
         ],
         Work: [
-            { name: 'Banana Republic', url: 'https://bananarepublic.gap.com/browse/category.do?cid=1017332' },
+            { name: 'Banana Republic', url: 'https://bananarepublic.gap.com/browse/women/new-arrivals?cid=48422&nav=meganav%3AWomen%3ADiscover%3ANew%20Arrivals' },
             { name: 'Zara', url: 'https://www.zara.com/ca/en/woman-new-in-l1180.html' },
         ],
         Formal: [
-            { name: 'Reformation', url: 'https://www.thereformation.com/categories/dresses' },
-            { name: 'Nordstrom', url: 'https://www.nordstrom.ca/browse/women' },
+            { name: 'Reformation', url: 'https://www.thereformation.com/new' },
+            { name: 'Nordstrom', url: 'https://www.nordstrom.com/browse/women' },
         ],
         Party: [
             { name: 'PrettyLittleThing', url: 'https://www.prettylittlething.ca/clothing.html' },
-            { name: 'Fashion Nova', url: 'https://www.fashionnova.com/collections/party' },
+            { name: 'Fashion Nova', url: 'https://www.fashionnova.com/' },
         ],
         Travel: [
             { name: 'Aritzia', url: 'https://www.aritzia.com/en/clothing' },
-            { name: 'Old Navy', url: 'https://oldnavy.gap.com/browse/category.do?cid=1057888' },
+            { name: 'Old Navy', url: 'https://oldnavy.gap.com/browse/women/shop-all-womens?cid=1185233&mlink=5151%2CtopNav%2Cvisnav&nav=meganav%3AWomen%3A%3A' },
         ],
         Sport: [
-            { name: 'Nike', url: 'https://www.nike.com/w/womens-clothing-5e1x6z6ymx6' },
-            { name: 'Lululemon', url: 'https://shop.lululemon.com/c/women/_/N-8t7' },
+            { name: 'Nike', url: 'https://www.nike.com/women' },
+            { name: 'Lululemon', url: 'https://shop.lululemon.com/story/women' },
         ]
     };
 
