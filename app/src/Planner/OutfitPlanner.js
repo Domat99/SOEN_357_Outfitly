@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
+import Footer from "../Footer/Footer";
 
 const OutfitPlanner = ({}) => {
     const [outfit, setOutfit] = useState(null);
@@ -75,77 +76,80 @@ const OutfitPlanner = ({}) => {
 
 
     return (
-        <div className="planner-page">
-            <div className="planner-header">
-                <h1 className="planner-title">Outfit Planner</h1>
-                <p className="planner-subtitle">
-                    Let Outfitly suggest the perfect outfit based on your closet and today's needs.
-                </p>
-                <div className="occasion-selector">
-                    <label htmlFor="occasion">Occasion:</label>
-                    <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
-                        <option value="Casual">Casual</option>
-                        <option value="Work">Work</option>
-                        <option value="Formal">Formal</option>
-                        <option value="Party">Party</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Sport">Sport</option>
-                    </select>
-                </div>
-                <button className="btn-generate" onClick={handleGenerateOutfit}>
-                    Generate Outfit
-                </button>
-            </div>
-
-            {outfit && (
-                <div className="outfit-card">
-                    <h2>Today's Look <span style={{fontWeight: 400, fontSize: '1rem'}}>({outfit.occasion})</span></h2>
-                    <div className="outfit-images">
-                        {outfit.layerImage && (
-                            <div><img src={outfit.layerImage} alt="Layer"/><p>{outfit.layer}</p></div>
-                        )}
-                        {outfit.topImage && (
-                            <div><img src={outfit.topImage} alt="Top"/><p>{outfit.top}</p></div>
-                        )}
-                        {outfit.bottomImage && (
-                            <div><img src={outfit.bottomImage} alt="Bottom"/><p>{outfit.bottom}</p></div>
-                        )}
-                        {outfit.shoesImage && (
-                            <div><img src={outfit.shoesImage} alt="Shoes"/><p>{outfit.shoes}</p></div>
-                        )}
-                        {outfit.accessoryImage && (
-                            <div><img src={outfit.accessoryImage} alt="Accessory"/><p>{outfit.accessory}</p></div>
-                        )}
+        <div>
+            <div className="planner-page">
+                <div className="planner-header">
+                    <h1 className="planner-title">Outfit Planner</h1>
+                    <p className="planner-subtitle">
+                        Let Outfitly suggest the perfect outfit based on your closet and today's needs.
+                    </p>
+                    <div className="occasion-selector">
+                        <label htmlFor="occasion">Occasion:</label>
+                        <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
+                            <option value="Casual">Casual</option>
+                            <option value="Work">Work</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Party">Party</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Sport">Sport</option>
+                        </select>
                     </div>
-                    <div className="outfit-actions">
-                        <button className="btn-try" onClick={handleGenerateOutfit}>Try Again</button>
-                        <button className="btn-save" onClick={handleSaveOutfit}>Save Outfit</button>
-                    </div>
+                    <button className="btn-generate" onClick={handleGenerateOutfit}>
+                        Generate Outfit
+                    </button>
                 </div>
-            )}
 
-            {savedOutfits.length > 0 && (
-                <div className="saved-outfits">
-                    <h3>Saved Outfits</h3>
-                    {savedOutfits.map((saved, index) => (
-                        <div key={index} className="saved-outfit">
-                            <div className="outfit-images">
-                                {saved.layerImage &&
-                                    <div><img src={saved.layerImage} alt="Layer"/><p>{saved.layer}</p></div>}
-                                {saved.topImage && <div><img src={saved.topImage} alt="Top"/><p>{saved.top}</p></div>}
-                                {saved.bottomImage &&
-                                    <div><img src={saved.bottomImage} alt="Bottom"/><p>{saved.bottom}</p></div>}
-                                {saved.shoesImage &&
-                                    <div><img src={saved.shoesImage} alt="Shoes"/><p>{saved.shoes}</p></div>}
-                                {saved.accessoryImage &&
-                                    <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
-                                    </div>}
-                            </div>
-                            <button onClick={() => handleDeleteOutfit(index)}>Delete</button>
+                {outfit && (
+                    <div className="outfit-card">
+                        <h2>Today's Look <span style={{fontWeight: 400, fontSize: '1rem'}}>({outfit.occasion})</span></h2>
+                        <div className="outfit-images">
+                            {outfit.layerImage && (
+                                <div><img src={outfit.layerImage} alt="Layer"/><p>{outfit.layer}</p></div>
+                            )}
+                            {outfit.topImage && (
+                                <div><img src={outfit.topImage} alt="Top"/><p>{outfit.top}</p></div>
+                            )}
+                            {outfit.bottomImage && (
+                                <div><img src={outfit.bottomImage} alt="Bottom"/><p>{outfit.bottom}</p></div>
+                            )}
+                            {outfit.shoesImage && (
+                                <div><img src={outfit.shoesImage} alt="Shoes"/><p>{outfit.shoes}</p></div>
+                            )}
+                            {outfit.accessoryImage && (
+                                <div><img src={outfit.accessoryImage} alt="Accessory"/><p>{outfit.accessory}</p></div>
+                            )}
                         </div>
-                    ))}
-                </div>
-            )}
+                        <div className="outfit-actions">
+                            <button className="btn-try" onClick={handleGenerateOutfit}>Try Again</button>
+                            <button className="btn-save" onClick={handleSaveOutfit}>Save Outfit</button>
+                        </div>
+                    </div>
+                )}
+
+                {savedOutfits.length > 0 && (
+                    <div className="saved-outfits">
+                        <h3>Saved Outfits</h3>
+                        {savedOutfits.map((saved, index) => (
+                            <div key={index} className="saved-outfit">
+                                <div className="outfit-images">
+                                    {saved.layerImage &&
+                                        <div><img src={saved.layerImage} alt="Layer"/><p>{saved.layer}</p></div>}
+                                    {saved.topImage && <div><img src={saved.topImage} alt="Top"/><p>{saved.top}</p></div>}
+                                    {saved.bottomImage &&
+                                        <div><img src={saved.bottomImage} alt="Bottom"/><p>{saved.bottom}</p></div>}
+                                    {saved.shoesImage &&
+                                        <div><img src={saved.shoesImage} alt="Shoes"/><p>{saved.shoes}</p></div>}
+                                    {saved.accessoryImage &&
+                                        <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
+                                        </div>}
+                                </div>
+                                <button onClick={() => handleDeleteOutfit(index)}>Delete</button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <Footer />
         </div>
     );
 };

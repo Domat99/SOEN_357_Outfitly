@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfilePage.css';
+import Footer from "../Footer/Footer";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -86,75 +87,79 @@ function ProfilePage() {
   if (!user) return <div>Loading...</div>;
 
   return (
-    <div className="profile-page">
-      <div className="profile-header">
-        <h1 className="profile-title">Your Profile</h1>
-        <p className="profile-subtitle">Manage your wardrobe, preferences, and account details.</p>
-      </div>
+      <div>
+        <div className="profile-page">
+          <div className="profile-header">
+            <h1 className="profile-title">Your Profile</h1>
+            <p className="profile-subtitle">Manage your wardrobe, preferences, and account details.</p>
+          </div>
 
-      <div className="profile-content">
-        {/* Personal Info */}
-        <div className="profile-card-user-info">
-          <h2>Personal Info</h2>
-          {isEditingInfo ? (
-              <div className={"user-info-open"}>
-                <p className={"user-info-input-section"}>
-                  <strong>Name:</strong><br/>
-                  <input name="name" value={formData.name} onChange={handleChange}/>
-                </p>
-                <p className={"user-info-input-section"}>
-                  <strong>Email:</strong><br/>
-                  <input name="email" value={formData.email} onChange={handleChange}/>
-                </p>
-                <div className={"profile-button-container"}>
-                  <button className="btn-primary" onClick={saveInfo}>Save</button>
-                  <button className="btn-secondary" onClick={() => setIsEditingInfo(false)}>Cancel</button>
-                </div>
-                </div>
-          ) : (
-              <>
-                <p><strong>Name:</strong> {user.name}</p>
-                <p><strong>Email:</strong> {user.email}</p>
-              <button className="btn-primary" onClick={() => setIsEditingInfo(true)}>Edit</button>
-            </>
-          )}
-        </div>
+          <div className="profile-content">
+            {/* Personal Info */}
+            <div className="profile-card-user-info">
+              <h2>Personal Info</h2>
+              {isEditingInfo ? (
+                  <div className={"user-info-open"}>
+                    <p className={"user-info-input-section"}>
+                      <strong>Name:</strong><br/>
+                      <input name="name" value={formData.name} onChange={handleChange}/>
+                    </p>
+                    <p className={"user-info-input-section"}>
+                      <strong>Email:</strong><br/>
+                      <input name="email" value={formData.email} onChange={handleChange}/>
+                    </p>
+                    <div className={"profile-button-container"}>
+                      <button className="btn-primary" onClick={saveInfo}>Save</button>
+                      <button className="btn-secondary" onClick={() => setIsEditingInfo(false)}>Cancel</button>
+                    </div>
+                    </div>
+              ) : (
+                  <>
+                    <p><strong>Name:</strong> {user.name}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                  <button className="btn-primary" onClick={() => setIsEditingInfo(true)}>Edit</button>
+                </>
+              )}
+            </div>
 
-        {/* Style Preferences
-        <div className="profile-card">
-          <h2>Style Preferences</h2>
-          {isEditingPreferences ? (
-            <>
-              <p>
-                <strong>Body Type:</strong><br />
-                <input name="bodyType" value={formData.bodyType} onChange={handleChange} />
-              </p>
-              <p>
-                <strong>Color Palette:</strong><br />
-                <input name="colorPalette" value={formData.colorPalette} onChange={handleChange} />
-              </p>
-              <button className="btn-primary" onClick={savePreferences}>Save</button>
-            </>
-          ) : (
-            <>
-              <p><strong>Body Type:</strong> {user.bodyMetrics?.bodyType || 'N/A'}</p>
-              <p><strong>Color Palette:</strong> {user.colorPalette || 'N/A'}</p>
-              <button className="btn-primary" onClick={() => setIsEditingPreferences(true)}>Update</button>
-            </>
-          )}
-        </div> */}
+            {/* Style Preferences
+            <div className="profile-card">
+              <h2>Style Preferences</h2>
+              {isEditingPreferences ? (
+                <>
+                  <p>
+                    <strong>Body Type:</strong><br />
+                    <input name="bodyType" value={formData.bodyType} onChange={handleChange} />
+                  </p>
+                  <p>
+                    <strong>Color Palette:</strong><br />
+                    <input name="colorPalette" value={formData.colorPalette} onChange={handleChange} />
+                  </p>
+                  <button className="btn-primary" onClick={savePreferences}>Save</button>
+                </>
+              ) : (
+                <>
+                  <p><strong>Body Type:</strong> {user.bodyMetrics?.bodyType || 'N/A'}</p>
+                  <p><strong>Color Palette:</strong> {user.colorPalette || 'N/A'}</p>
+                  <button className="btn-primary" onClick={() => setIsEditingPreferences(true)}>Update</button>
+                </>
+              )}
+            </div> */}
 
-        {/* Wardrobe Summary */}
-        <div className="profile-card">
-          <h2>Wardrobe Summary</h2>
-          <p><strong>Items:</strong> {(34 + user.closetImages?.length) || 34}</p>
-          <p><strong>Favorite Brands:</strong> Zara, Uniqlo</p>
-          <div className={"profile-button-container"}>
-            <button className="btn-primary view-closet-button" onClick={() => navigate('/closet')}>View Closet</button>
+            {/* Wardrobe Summary */}
+            <div className="profile-card">
+              <h2>Wardrobe Summary</h2>
+              <p><strong>Items:</strong> {(34 + user.closetImages?.length) || 34}</p>
+              <p><strong>Favorite Brands:</strong> Zara, Uniqlo</p>
+              <div className={"profile-button-container"}>
+                <button className="btn-primary view-closet-button" onClick={() => navigate('/closet')}>View Closet</button>
+              </div>
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-    </div>
+
   );
 }
 
