@@ -71,8 +71,14 @@ export default function Closet({closetItems, setClosetItems}) {
 
 
     if (!closetItems || Object.keys(closetItems).length === 0) {
-        return <div className="closet-page"><p>Loading closet...</p></div>;
+        return (
+            <div className="closet-loading">
+                <div className="spinner" />
+                <p>Loading your closet...</p>
+            </div>
+        );
     }
+
 
 
     return (
