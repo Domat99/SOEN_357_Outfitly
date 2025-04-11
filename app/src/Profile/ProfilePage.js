@@ -8,7 +8,7 @@ function ProfilePage() {
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [isEditingPreferences, setIsEditingPreferences] = useState(false);
   const [formData, setFormData] = useState({});
-  const userId = '67f8544d88b94d29d3e1a238'; // Hardcoded for now
+  const userId = JSON.parse(localStorage.getItem('loggedInUser')).id;
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/users/${userId}`)
@@ -117,7 +117,7 @@ function ProfilePage() {
           )}
         </div>
 
-        {/* Style Preferences */}
+        {/* Style Preferences
         <div className="profile-card">
           <h2>Style Preferences</h2>
           {isEditingPreferences ? (
@@ -139,12 +139,12 @@ function ProfilePage() {
               <button className="btn-primary" onClick={() => setIsEditingPreferences(true)}>Update</button>
             </>
           )}
-        </div>
+        </div> */}
 
         {/* Wardrobe Summary */}
         <div className="profile-card">
           <h2>Wardrobe Summary</h2>
-          <p><strong>Items:</strong> {user.closet?.length || 0}</p>
+          <p><strong>Items:</strong> {(34 + user.closetImages?.length) || 34}</p>
           <p><strong>Favorite Brands:</strong> Zara, Uniqlo</p>
           <button className="btn-primary" onClick={() => navigate('/closet')}>View Closet</button>
         </div>
