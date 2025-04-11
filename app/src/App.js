@@ -8,13 +8,12 @@ import LoginPage from './Login/LoginPage';
 import SignUp from './Login/SignUp';
 import OutfitPlanner from './Planner/OutfitPlanner';
 import WeatherPage from './Weather/WeatherPage';
-import {initialClosetItems} from "./Closet/initialClosetItems";
 import ProtectedRoute from './components/ProtectedRoute';
 
 
 
 function App() {
-    const [closetItems, setClosetItems] = useState(initialClosetItems);
+    const [closetItems, setClosetItems] = useState({});
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     useEffect(() => {
@@ -38,7 +37,11 @@ function App() {
                     path="/closet"
                     element={
                         <ProtectedRoute>
-                            <Closet closetItems={closetItems} setClosetItems={setClosetItems} />
+                            <Closet
+                                closetItems={closetItems}
+                                setClosetItems={setClosetItems}
+                                loggedInUser={loggedInUser}
+                            />
                         </ProtectedRoute>
                     }
                 />
@@ -54,7 +57,7 @@ function App() {
                     path="/planner"
                     element={
                         <ProtectedRoute>
-                            <OutfitPlanner closetItems={closetItems} />
+                            <OutfitPlanner/>
                         </ProtectedRoute>
                     }
                 />

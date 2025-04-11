@@ -1,45 +1,68 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
+import {FiTrash2} from 'react-icons/fi';
 
-const OutfitPlanner = ({closetItems}) => {
+const OutfitPlanner = ({}) => {
     const [outfit, setOutfit] = useState(null);
     const [occasion, setOccasion] = useState('Casual');
     const [savedOutfits, setSavedOutfits] = useState([]);
 
-    const getRandomItem = (category) => {
-        const items = closetItems[category];
-        if (!items || items.length === 0) return null;
+    const handleGenerateOutfit = async () => {
+        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (!user || !user.id || !user.bodyMetrics) {
+            alert('User or body metrics missing');
+            return;
+        }
 
-        const matchingItems = items.filter(item => item.tags?.includes(occasion));
-        const unworn = matchingItems.filter(item => item.status !== 'Worn Recently');
-        const pool = unworn.length ? unworn : matchingItems;
+        try {
+            const response = await fetch('http://localhost:8080/api/outfit/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: user.id,
+                    styleType: occasion,
+                    lat: 45.5019,
+                    lon: -73.5674,
+                    ...user.bodyMetrics,
+                }),
+            });
 
-        return pool.length > 0
-            ? pool[Math.floor(Math.random() * pool.length)]
-            : null;
-    };
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Backend error:', errorText);
+                alert('Error generating outfit');
+                return;
+            }
 
-    const handleGenerateOutfit = () => {
-        const top = getRandomItem('Shirts') || getRandomItem('Dresses');
-        const layer = getRandomItem('Layers');
-        const bottom = getRandomItem('Pants');
-        const shoes = getRandomItem('Shoes');
-        const accessory = getRandomItem('Accessories');
+            const data = await response.json();
 
-        setOutfit({
-            occasion,
-            top: top?.name,
-            topImage: top?.image,
-            layer: layer?.name,
-            layerImage: layer?.image,
-            bottom: bottom?.name,
-            bottomImage: bottom?.image,
-            shoes: shoes?.name,
-            shoesImage: shoes?.image,
-            accessory: accessory?.name,
-            accessoryImage: accessory?.image,
-        });
+            const formattedOutfit = {occasion};
 
+            data.forEach(item => {
+                const type = item.type.toLowerCase();
+
+                if (type === 'shirts' || type === 'dresses') {
+                    formattedOutfit.top = item.name;
+                    formattedOutfit.topImage = item.link;
+                } else if (type === 'layers') {
+                    formattedOutfit.layer = item.name;
+                    formattedOutfit.layerImage = item.link;
+                } else if (type === 'pants') {
+                    formattedOutfit.bottom = item.name;
+                    formattedOutfit.bottomImage = item.link;
+                } else if (type === 'shoes') {
+                    formattedOutfit.shoes = item.name;
+                    formattedOutfit.shoesImage = item.link;
+                } else if (type === 'accessories') {
+                    formattedOutfit.accessory = item.name;
+                    formattedOutfit.accessoryImage = item.link;
+                }
+            });
+            setOutfit(formattedOutfit);
+        } catch (error) {
+            console.error(error);
+            alert('Error generating outfit');
+        }
     };
 
     const handleSaveOutfit = () => {
@@ -125,7 +148,9 @@ const OutfitPlanner = ({closetItems}) => {
                                     <div><img src={saved.accessoryImage} alt="Accessory"/><p>{saved.accessory}</p>
                                     </div>}
                             </div>
-                            <button onClick={() => handleDeleteOutfit(index)}>Delete</button>
+                            <div className="trash-icon" onClick={() => handleDeleteOutfit(index)}>
+                                <FiTrash2 size={20}/>
+                            </div>
                         </div>
                     ))}
                 </div>

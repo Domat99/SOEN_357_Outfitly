@@ -1,9 +1,14 @@
+body{
+    margin: 0;
+}
+
 .homepage {
     font-family: 'Outfit', sans-serif;
     background-color: #fffdfc;
     color: #333;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 .feature-icon {
     font-size: 2.5rem;
@@ -86,7 +91,7 @@
     flex-wrap: wrap;
 }
 
-.btn-primary {
+.btn-primary-home {
     background-color: #669bbc;
     color: white;
     border: none;
@@ -95,9 +100,10 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    /*height: 10px;*/
 }
 
-.btn-primary:hover {
+.btn-primary-home:hover {
     background-color: #557ea6;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -131,7 +137,6 @@
     height: auto;
     border-radius: 16px;
     object-fit: cover;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     transform: translateX(40px);
 }

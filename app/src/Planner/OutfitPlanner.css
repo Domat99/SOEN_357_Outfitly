@@ -1,200 +1,234 @@
-/* Global Container */
+/* ---------------- GLOBAL ---------------- */
 .planner-page {
-    font-family: 'Outfit', sans-serif;
-    padding: 80px 40px;
-    background-color: #fffdfc;
-    color: #1a1a2e;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    padding: 80px 24px;
+    background: linear-gradient(to bottom right, #fefefe, #f2f4f8);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
-/* Header */
+/* ---------------- HEADER ---------------- */
 .planner-header {
-    max-width: 800px;
     text-align: center;
-    margin-bottom: 40px;
+    max-width: 900px;
+    margin-bottom: 50px;
 }
 
 .planner-title {
-    font-size: 2.8rem;
-    margin-bottom: 16px;
+    font-size: 3.4rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #587578, #354f52);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes glowText {
+    from {
+        text-shadow: 0 0 6px #587578;
+    }
+    to {
+        text-shadow: 0 0 20px #354f52;
+    }
 }
 
 .planner-subtitle {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 30px;
-    line-height: 1.5;
+    font-size: 1.2rem;
+    color: #4f4f4f;
+    line-height: 1.6;
+    margin-top: 12px;
 }
 
-/* Occasion Selector */
+/* ---------------- SELECT ---------------- */
 .occasion-selector {
-    margin-bottom: 20px;
+    margin: 24px 0;
     font-size: 1rem;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .occasion-selector select {
-    padding: 8px 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 10px 18px;
     font-size: 1rem;
-}
-
-/* Outfit Card */
-.outfit-card {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
-    padding: 40px;
-    width: 100%;
-    max-width: 650px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.outfit-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #1a1a2e;
-}
-
-/* Outfit Images */
-.outfit-images {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.outfit-images img {
-    width: 120px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.outfit-images p {
-    margin-top: 8px;
-    text-align: center;
-    font-weight: 500;
-    color: #333;
-}
-
-/* Outfit Actions */
-.outfit-actions {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-/* Saved Outfits */
-.saved-outfits {
-    margin-top: 60px;
-    width: 100%;
-    max-width: 800px;
-}
-
-.saved-outfits h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #1a1a2e;
-}
-
-.saved-outfit {
-    background-color: #f9f9f9;
-    padding: 20px;
+    border: none;
     border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
 }
 
-.saved-outfit .outfit-images {
-    justify-content: start;
+.occasion-selector select:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-.saved-outfit button {
-    margin-top: 14px;
-    padding: 8px 16px;
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
+/* ---------------- OUTFIT CARD ---------------- */
+.outfit-card {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    padding: 48px;
+    width: 100%;
+    max-width: 740px;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
 }
 
-.saved-outfit button:hover {
-    background-color: #c0392b;
-}
-
-/* Buttons */
-
-/* Primary: Generate Outfit */
-.btn-generate {
-    background-color: #3f7cac;
-    color: white;
-    border: none;
-    padding: 10px 24px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-generate:hover {
-    background-color: #356c8b;
-}
-
-/* Secondary: Try Again */
-.btn-try {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ccc;
-    padding: 8px 18px;
-    font-size: 0.95rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-try:hover {
-    background-color: #e0e0e0;
-}
-
-/* Success: Save Outfit */
-.btn-save {
-    background-color: #84a98c;
-    color: white;
-    border: none;
-    padding: 8px 18px;
-    font-size: 0.95rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-save:hover {
-    background-color: #354f52;
-
-}
-
-/* Animation */
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.outfit-card h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* ---------------- OUTFIT IMAGES ---------------- */
+.outfit-images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.outfit-images div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.outfit-images div:hover {
+    transform: translateY(-4px) scale(1.03);
+}
+
+.outfit-images img {
+    width: 130px;
+    height: 180px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.3s ease;
+}
+
+.outfit-images p {
+    margin-top: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* ---------------- ACTIONS ---------------- */
+.outfit-actions {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ---------------- BUTTONS ---------------- */
+.btn-generate {
+    background: #669bbc;
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-try,
+.btn-save {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-try {
+    background-color: #ffffff;
+    color: #444;
+    border: 1px solid #bbb;
+}
+
+.btn-try:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-save {
+    background-color: #b5838d;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #9e6c77;
+
+}
+
+/* ---------------- SAVED OUTFITS ---------------- */
+.saved-outfits {
+    margin-top: 64px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.saved-outfits h3 {
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    color: #1a1a2e;
+}
+
+.saved-outfit {
+    position: relative;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: white;
+}
+
+.saved-outfit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.1);
+}
+
+.saved-outfit .outfit-images {
+    justify-content: flex-start;
+}
+.trash-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #717171;
+    transition: transform 0.2s ease;
+}
+
+.trash-icon:hover {
+    transform: scale(1.2);
 }
