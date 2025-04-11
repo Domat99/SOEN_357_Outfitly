@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
-import { FiTrash2 } from 'react-icons/fi';
+import {FiTrash2} from 'react-icons/fi';
 
 const OutfitPlanner = ({}) => {
     const [outfit, setOutfit] = useState(null);
@@ -17,7 +17,7 @@ const OutfitPlanner = ({}) => {
         try {
             const response = await fetch('http://localhost:8080/api/outfit/generate', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     userId: user.id,
                     styleType: occasion,
@@ -27,11 +27,17 @@ const OutfitPlanner = ({}) => {
                 }),
             });
 
-            if (!response.ok) throw new Error('Failed to generate outfit');
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Backend error:', errorText);
+                alert('Error generating outfit');
+                return;
+            }
 
             const data = await response.json();
 
-            const formattedOutfit = { occasion };
+            const formattedOutfit = {occasion};
+
             data.forEach(item => {
                 const type = item.type.toLowerCase();
 

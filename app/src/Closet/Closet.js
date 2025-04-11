@@ -4,7 +4,14 @@ import { uploadToCloudinary } from './uploadToCloudinary';
 
 export default function Closet({ closetItems, setClosetItems }) {
     const [showModal, setShowModal] = useState(false);
-    const [newItem, setNewItem] = useState({ name: '', image: '', status: '', tags: [] });
+    const [newItem, setNewItem] = useState({
+        name: '',
+        link: '', // was image
+        status: '',
+        tags: [],
+        weather: '',
+        size: ''
+    });
     const [activeCategory, setActiveCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -19,7 +26,7 @@ export default function Closet({ closetItems, setClosetItems }) {
     };
 
     const addItem = async () => {
-        if (!newItem.name || !newItem.image) {
+        if (!newItem.name || !newItem.link) {
             setErrorMsg('Item name and image are required.');
             return;
         }
@@ -156,7 +163,7 @@ export default function Closet({ closetItems, setClosetItems }) {
                                 if (file) {
                                     const imageUrl = await uploadToCloudinary(file);
                                     if (imageUrl) {
-                                        setNewItem({ ...newItem, image: imageUrl });
+                                        setNewItem({ ...newItem, link: imageUrl });
                                         setErrorMsg('');
                                     } else {
                                         setErrorMsg('Failed to upload image.');
@@ -164,8 +171,8 @@ export default function Closet({ closetItems, setClosetItems }) {
                                 }
                             }}
                         />
-                        {newItem.image && (
-                            <img src={newItem.image} alt="Preview" className="modal-preview-img" />
+                        {newItem.link && (
+                            <img src={newItem.link} alt="Preview" className="modal-preview-img" />
                         )}
                         <input
                             type="text"
@@ -193,6 +200,31 @@ export default function Closet({ closetItems, setClosetItems }) {
                                 </label>
                             ))}
                         </div>
+                        <div className="size-options">
+                            {['warm', 'cloudy', 'cold', 'cool', 'any'].map((weather) => (
+                                <button
+                                    key={weather}
+                                    type="button"
+                                    className={`size-chip ${newItem.weather === weather ? 'selected' : ''}`}
+                                    onClick={() => setNewItem({ ...newItem, weather })}
+                                >
+                                    {weather}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="size-options">
+                            {['S', 'M', 'L'].map((size) => (
+                                <button
+                                    key={size}
+                                    type="button"
+                                    className={`size-chip ${newItem.size === size ? 'selected' : ''}`}
+                                    onClick={() => setNewItem({ ...newItem, size })}
+                                >
+                                    {size}
+                                </button>
+                            ))}
+                        </div>
+
                         {errorMsg && <div className="error-message">{errorMsg}</div>}
                         <div className="modal-actions">
                             <button onClick={() => setShowModal(false)}>Cancel</button>

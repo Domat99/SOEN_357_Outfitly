@@ -32,7 +32,6 @@ public class OutfitService {
         return "cloudy";
     }
 
-
     public List<ClosetItem> generateOutfit(List<ClosetItem> allItems, String styleType, String weatherCondition, double temperature,
                                            double height, double weight, double chest, double waist, double hips, double shoulders) {
 
@@ -40,22 +39,46 @@ public class OutfitService {
         String simplifiedWeather = simplifyWeather(weatherCondition, temperature);
 
         Map<String, ClosetItem> outfit = new HashMap<>();
+        boolean dressSelected = false;
 
+        Collections.shuffle(allItems);
         for (ClosetItem item : allItems) {
             String type = item.getType();
-            boolean isAccessory = type != null && type.equalsIgnoreCase("Accessories");
+            if (type == null) continue;
 
+            boolean isAccessory = type.equalsIgnoreCase("Accessories");
+
+            // Style match (tag)
             boolean matchesType = item.getTags() != null &&
                     item.getTags().stream().anyMatch(tag -> tag.equalsIgnoreCase(styleType));
 
-            boolean matchesWeather = isAccessory ||
-                    item.getWeather() == null ||
-                    item.getWeather().equalsIgnoreCase("any") ||
-                    simplifyWeather(item.getWeather(), temperature).equalsIgnoreCase(simplifiedWeather);
+            // Weather match: "any", null, or actual simplified match
+            String itemWeather = item.getWeather() != null ? item.getWeather().toLowerCase() : "any";
+            boolean isWeatherNeutral = itemWeather.equals("any");
+            boolean matchesWeather = isAccessory || isWeatherNeutral ||
+                    simplifyWeather(itemWeather, temperature).equalsIgnoreCase(simplifiedWeather);
 
+            // Size match
             boolean matchesSize = isAccessory || size.equalsIgnoreCase(item.getSize());
 
             if (matchesType && matchesWeather && matchesSize) {
+                if (type.equalsIgnoreCase("Dresses")) {
+                    outfit.put("Dresses", item);
+                    outfit.remove("Shirts");
+                    outfit.remove("Pants");
+                    outfit.remove("Belts");
+                    dressSelected = true;
+                    System.out.println("✅ MATCHED DRESS: " + item.getName());
+                    continue;
+                }
+
+                if (dressSelected && (type.equalsIgnoreCase("Shirts") ||
+                        type.equalsIgnoreCase("Pants") ||
+                        type.equalsIgnoreCase("Belts"))) {
+                    System.out.println("Skipping due to dress: " + item.getName() + " (" + type + ")");
+                    continue;
+                }
+
                 switch (type) {
                     case "Shirts" -> outfit.putIfAbsent("Shirts", item);
                     case "Layers" -> {
@@ -65,7 +88,7 @@ public class OutfitService {
                     }
                     case "Pants" -> outfit.putIfAbsent("Pants", item);
                     case "Shoes" -> outfit.putIfAbsent("Shoes", item);
-                    case "Accessories" -> outfit.putIfAbsent("Accessories", item);
+                    case "Accessories", "Belts" -> outfit.putIfAbsent(type, item);
                 }
 
                 System.out.println("✅ MATCHED: " + item.getName() + " (" + type + ")");
@@ -80,5 +103,8 @@ public class OutfitService {
 
         return outfit.values().stream().toList();
     }
+
+
+
 
 }
