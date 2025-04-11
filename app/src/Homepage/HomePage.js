@@ -1,6 +1,7 @@
 import React from 'react';
 import './HomePage.css';
 import Footer from "../Footer/Footer";
+import mainHomePagePic from "../assets/images/Main_Page_Picture.png";
 
 
 
@@ -15,12 +16,12 @@ const HomePage = () => {
                             Outfitly is your AI-powered personal stylist that curates outfits based on your wardrobe, weather, and preferences — so you never stress over what to wear again.
                         </p>
                         <div className="cta-buttons">
-                            <button className="btn-primary">Get Started</button>
+                            <button className="btn-primary-home">Get Started</button>
                             <button className="btn-outline">Log In</button>
                         </div>
                     </div>
                     <div className="hero-image">
-                        <img src="/" alt="Stylish wardrobe preview" />
+                        <img src={mainHomePagePic} alt="Stylish wardrobe preview" />
                     </div>
                 </div>
             </section>
