@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomePage.css';
+import Footer from "../Footer/Footer";
 
 
 
@@ -68,6 +69,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 };
