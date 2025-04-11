@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './SignUp.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -54,27 +55,16 @@ const SignUpPage = () => {
             }
 
             await res.json();
-            setSuccess('Account created! You can now log in.');
-            setError('');
-            setForm({
-                name: '',
-                email: '',
-                password: '',
-                gender: '',
-                bodyMetrics: {
-                    height: '',
-                    weight: '',
-                    chest: '',
-                    waist: '',
-                    hips: '',
-                    shoulders: ''
-                }
-            });
+
+            // Redirect to home
+            navigate('/login');
+
         } catch (err) {
             setError(err.message);
             setSuccess('');
         }
     };
+
 
     return (
         <div className="signup-page">
