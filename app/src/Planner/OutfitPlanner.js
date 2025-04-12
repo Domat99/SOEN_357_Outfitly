@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './OutfitPlanner.css';
 import {FiTrash2} from 'react-icons/fi';
+import Footer from "../Footer/Footer";
 
 const OutfitPlanner = ({}) => {
     const storeSuggestions = {
@@ -109,27 +110,28 @@ const OutfitPlanner = ({}) => {
 
 
     return (
-        <div className="planner-page">
-            <div className="planner-header">
-                <h1 className="planner-title">Outfit Planner</h1>
-                <p className="planner-subtitle">
-                    Let Outfitly suggest the perfect outfit based on your closet and today's needs.
-                </p>
-                <div className="occasion-selector">
-                    <label htmlFor="occasion">Occasion:</label>
-                    <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
-                        <option value="Casual">Casual</option>
-                        <option value="Work">Work</option>
-                        <option value="Formal">Formal</option>
-                        <option value="Party">Party</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Sport">Sport</option>
-                    </select>
+        <div>
+            <div className="planner-page">
+                <div className="planner-header">
+                    <h1 className="planner-title">Outfit Planner</h1>
+                    <p className="planner-subtitle">
+                        Let Outfitly suggest the perfect outfit based on your closet and today's needs.
+                    </p>
+                    <div className="occasion-selector">
+                        <label htmlFor="occasion">Occasion:</label>
+                        <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
+                            <option value="Casual">Casual</option>
+                            <option value="Work">Work</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Party">Party</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Sport">Sport</option>
+                        </select>
+                    </div>
+                    <button className="btn-generate" onClick={handleGenerateOutfit}>
+                        Generate Outfit
+                    </button>
                 </div>
-                <button className="btn-generate" onClick={handleGenerateOutfit}>
-                    Generate Outfit
-                </button>
-            </div>
 
             {outfit && (
                 <div className="outfit-card">
@@ -206,6 +208,9 @@ const OutfitPlanner = ({}) => {
                 </div>
             )}
         </div>
+            <Footer />
+        </div>
+
     );
 };
 

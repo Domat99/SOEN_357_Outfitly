@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Closet.css';
-import { uploadToCloudinary } from './uploadToCloudinary';
+import {uploadToCloudinary} from './uploadToCloudinary';
+import Footer from "../Footer/Footer";
 
 export default function Closet({ closetItems, setClosetItems }) {
     const [showModal, setShowModal] = useState(false);
@@ -84,8 +85,9 @@ export default function Closet({ closetItems, setClosetItems }) {
     }
 
     return (
-        <div className="closet-page">
-            <h2>Your Closet</h2>
+        <div>
+            <div className="closet-page">
+                <h2>Your Closet</h2>
 
             <input
                 type="text"
@@ -132,14 +134,14 @@ export default function Closet({ closetItems, setClosetItems }) {
                                 </div>
                             ))}
 
-                            <div className="card add-card" onClick={() => openModal(category)}>
-                                <div className="plus">+</div>
-                                <p>Add Item</p>
+                                <div className="card add-card" onClick={() => openModal(category)}>
+                                    <div className="plus">+</div>
+                                    <p>Add Item</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                );
-            })}
+                    );
+                })}
 
             {/* Add Item Modal */}
             {showModal && (
@@ -255,5 +257,9 @@ export default function Closet({ closetItems, setClosetItems }) {
                 </div>
             )}
         </div>
+            <Footer />
+
+        </div>
+
     );
 }
