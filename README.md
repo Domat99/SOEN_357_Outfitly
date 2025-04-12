@@ -7,7 +7,9 @@
 
 # Demo of Our Website
 
+https://github.com/user-attachments/assets/e0930b88-33e9-42d9-8ff4-e98c9ce28b12
 
+---
 
 ## 🚀 Features
 
@@ -87,4 +89,3 @@ We used a user study methodology to evaluate the app’s performance and impact:
 - Provide a more personalized and intelligent fashion planning tool
 
 ---
-
