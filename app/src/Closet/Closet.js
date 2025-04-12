@@ -7,7 +7,7 @@ export default function Closet({ closetItems, setClosetItems }) {
     const [showModal, setShowModal] = useState(false);
     const [newItem, setNewItem] = useState({
         name: '',
-        link: '', // was image
+        link: '',
         status: '',
         tags: [],
         weather: '',
@@ -143,7 +143,6 @@ export default function Closet({ closetItems, setClosetItems }) {
                     );
                 })}
 
-            {/* Add Item Modal */}
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal">
@@ -236,7 +235,6 @@ export default function Closet({ closetItems, setClosetItems }) {
                 </div>
             )}
 
-            {/* Preview Item Modal */}
             {selectedItem && (
                 <div className="modal-overlay preview-overlay" onClick={() => setSelectedItem(null)}>
                     <div className="modal item-preview" onClick={(e) => e.stopPropagation()}>

@@ -82,7 +82,6 @@ function ProfilePage() {
         })
         .catch(error => {
           console.error('Error updating user:', error);
-          // Optionally update state to display an error message in the UI
         });
 
       //.then(res => res.json())
@@ -103,7 +102,6 @@ function ProfilePage() {
           </div>
 
           <div className="profile-content">
-            {/* Personal Info */}
             <div className="profile-card-user-info">
               <h2 className="h2-profile">Personal Info</h2>
               {isEditingInfo ? (
@@ -130,7 +128,6 @@ function ProfilePage() {
               )}
             </div>
 
-            {/*Style Preferences*/}
             <div className="profile-card">
               <h2 className="h2-profile-2">Style Preferences</h2>
               {isEditingPreferences ? (
@@ -183,7 +180,6 @@ function ProfilePage() {
               )}
             </div>
 
-            {/* Wardrobe Summary */}
             <div className="profile-card">
               <h2 className="h2-profile">Wardrobe Summary</h2>
               <p><strong>Items:</strong> {(34 + user.closetImages?.length) || 34}</p>

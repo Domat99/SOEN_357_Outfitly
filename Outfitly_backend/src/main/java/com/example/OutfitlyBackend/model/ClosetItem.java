@@ -32,7 +32,6 @@ public class ClosetItem {
         this.userId = userId;
     }
 
-    // Getters and Setters
 
     public String getType() {return type;}
 

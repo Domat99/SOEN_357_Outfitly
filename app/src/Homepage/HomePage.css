@@ -31,9 +31,8 @@ body{
     box-shadow: 0 0 0 4px rgba(102, 155, 188, 0.25);
 }
 
-/***** HERO SECTION *****/
 .hero {
-    background: linear-gradient(135deg, #e9f5ff, #fde2e2); /* gender-neutral gradient */
+    background: linear-gradient(135deg, #e9f5ff, #fde2e2);
     padding: 100px 1px;
     position: relative;
     overflow: hidden;
@@ -145,7 +144,6 @@ body{
     transform: scale(1.03);
 }
 
-/***** FEATURES SECTION *****/
 .features {
     padding: 80px 20px;
     text-align: center;
@@ -197,7 +195,6 @@ body{
     line-height: 1.5;
 }
 
-/***** HOW IT WORKS SECTION *****/
 .how-it-works {
     background-color: #f3faff;
     padding: 80px 20px;
@@ -242,7 +239,6 @@ body{
     margin-bottom: 12px;
 }
 
-/***** RESPONSIVE *****/
 @media (max-width: 768px) {
     .hero-content {
         flex-direction: column-reverse;

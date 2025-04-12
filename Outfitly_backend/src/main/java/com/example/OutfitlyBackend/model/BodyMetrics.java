@@ -11,7 +11,6 @@ public class BodyMetrics {
 
     public BodyMetrics() {}
 
-    // Getters and Setters
 
     public Double getHeight() { return height; }
     public void setHeight(Double height) { this.height = height; }

@@ -24,7 +24,7 @@ public class OutfitService {
         }
 
         if (condition.contains("wind") || condition.contains("active")) {
-            return "cloudy"; // Or "windy" if you want to make it more specific
+            return "cloudy";
         }
 
         if (temperature >= 23) return "sunny";
@@ -48,17 +48,14 @@ public class OutfitService {
 
             boolean isAccessory = type.equalsIgnoreCase("Accessories");
 
-            // Style match (tag)
             boolean matchesType = item.getTags() != null &&
                     item.getTags().stream().anyMatch(tag -> tag.equalsIgnoreCase(styleType));
 
-            // Weather match: "any", null, or actual simplified match
             String itemWeather = item.getWeather() != null ? item.getWeather().toLowerCase() : "any";
             boolean isWeatherNeutral = itemWeather.equals("any");
             boolean matchesWeather = isAccessory || isWeatherNeutral ||
                     simplifyWeather(itemWeather, temperature).equalsIgnoreCase(simplifiedWeather);
 
-            // Size match
             boolean matchesSize = isAccessory || size.equalsIgnoreCase(item.getSize());
 
             if (matchesType && matchesWeather && matchesSize) {
