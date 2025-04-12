@@ -24,7 +24,7 @@ public class WeatherService {
         return Map.of(
                 "temperature", current.getDouble("temperature"),
                 "condition", mapCondition(weatherCode),
-                "humidity", 60, // Static for now
+                "humidity", 60,
                 "wind", current.getDouble("windspeed") + " km/h"
         );
     }

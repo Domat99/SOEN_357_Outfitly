@@ -27,7 +27,7 @@ public class UserService {
 
     public Optional<User> login(String email, String password) {
         return userRepository.findByEmail(email)
-                .filter(u -> u.getPassword().equals(password)); // Replace with hashed check in production
+                .filter(u -> u.getPassword().equals(password));
     }
 
     public Optional<User> getUserById(String id) {
@@ -40,11 +40,9 @@ public class UserService {
     }
 
     public ClosetItem addItemToUserCloset(String userId, ClosetItem newItem) {
-        // Save the item to the ClosetItem collection (with userId attached)
         newItem.setUserId(userId);
         ClosetItem savedItem = closetItemRepository.save(newItem);
 
-        // Also update the User's closetImages list
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isPresent()) {
             User user = userOpt.get();
@@ -64,13 +62,9 @@ public class UserService {
         Optional<User> existingUserOpt = userRepository.findById(id);
         if (existingUserOpt.isPresent()) {
             User existingUser = existingUserOpt.get();
-            // Update fields you want to allow
             existingUser.setName(updatedUser.getName());
             existingUser.setEmail(updatedUser.getEmail());
-            // Update bodyMetrics if provided
             existingUser.setBodyMetrics(updatedUser.getBodyMetrics());
-            // Note: Ensure that any field (like colorPalette) you reference in the frontend
-            // actually exists in the model.
             return userRepository.save(existingUser);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

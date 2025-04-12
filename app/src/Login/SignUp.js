@@ -56,7 +56,6 @@ const SignUpPage = () => {
 
             await res.json();
 
-            // Redirect to home
             navigate('/login');
 
         } catch (err) {
@@ -111,7 +110,6 @@ const SignUpPage = () => {
                         <option value="female">Female</option>
                     </select>
 
-                    {/* Body metrics */}
                     <input
                         type="number"
                         name="height"
