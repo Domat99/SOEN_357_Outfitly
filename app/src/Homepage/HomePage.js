@@ -20,7 +20,7 @@ const HomePage = () => {
                     <div className="hero-text">
                         <h1 className="title">Discover Your Style, Daily.</h1>
                         <p className="subtitle">
-                            Outfitly is your AI-powered personal stylist that curates outfits based on your wardrobe, weather, and preferences — so you never stress over what to wear again.
+                            Outfitly is your personal stylist that curates outfits based on your wardrobe, weather, and preferences — so you never stress over what to wear again.
                         </p>
                         <div className="cta-buttons">
                             <button className="btn-primary-home" onClick={() => navigate('/planner')}>
